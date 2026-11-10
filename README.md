@@ -4,14 +4,16 @@ Noct adalah pemutar FLAC lokal untuk Windows. Tambahkan folder musik, pilih albu
 
 ## Unduh aplikasi
 
-Paket siap pakai disiapkan untuk bagian **Releases** di repository GitHub proyek ini. Repository tujuan belum ditetapkan, sehingga tautan unduh publik belum tersedia.
+Unduh paket siap pakai dari [Releases Noct 0.5.1](https://github.com/DikyMartin/Noct/releases/tag/v0.5.1).
 
-Untuk versi 0.5.1, pilih salah satu paket berikut saat release sudah diterbitkan:
+Pilih salah satu paket berikut:
 
 | Paket | Cara memakai |
 | --- | --- |
-| `Noct-Setup-0.5.1-x64.exe` | Jalankan installer, lalu buka Noct dari Start Menu. |
-| `Noct-0.5.1-win-x64.zip` | Ekstrak seluruh ZIP ke folder pilihan, lalu jalankan `Noct.exe` di dalamnya. |
+| [Installer Windows x64](https://github.com/DikyMartin/Noct/releases/download/v0.5.1/Noct-Setup-0.5.1-x64.exe) | Jalankan installer, lalu buka Noct dari Start Menu. |
+| [ZIP Windows x64](https://github.com/DikyMartin/Noct/releases/download/v0.5.1/Noct-0.5.1-win-x64.zip) | Ekstrak seluruh ZIP ke folder pilihan, lalu jalankan `Noct.exe` di dalamnya. |
+
+[SHA256SUMS.txt](https://github.com/DikyMartin/Noct/releases/download/v0.5.1/SHA256SUMS.txt) berisi checksum kedua paket untuk memeriksa kecocokan unduhan.
 
 Paket installer dan ZIP menyertakan .NET Desktop Runtime. Pengguna tidak perlu memasang .NET atau SDK secara terpisah. ZIP **Source code** yang dibuat GitHub berisi source, bukan aplikasi siap jalan.
 
