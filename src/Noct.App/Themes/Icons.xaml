@@ -1,0 +1,49 @@
+<!--
+    A single outline icon set authored for this project, so there is no third-party icon licence to
+    carry. Every glyph is drawn on the same 24x24 grid and rendered with the same 1.5 DIP stroke,
+    which keeps weight consistent across the window, the island and the menus. No emoji is used as
+    a control.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+
+    <sys:Double x:Key="IconStrokeThickness">1.5</sys:Double>
+    <sys:Double x:Key="IconSize">20</sys:Double>
+
+    <!-- Transport -->
+    <Geometry x:Key="IconPlay">M 8,5 L 19,12 L 8,19 Z</Geometry>
+    <Geometry x:Key="IconPause">M 8.5,5 L 8.5,19 M 15.5,5 L 15.5,19</Geometry>
+    <Geometry x:Key="IconPrevious">M 7,5 L 7,19 M 19,5 L 9.5,12 L 19,19 Z</Geometry>
+    <Geometry x:Key="IconNext">M 17,5 L 17,19 M 5,5 L 14.5,12 L 5,19 Z</Geometry>
+    <Geometry x:Key="IconStop">M 7,7 L 17,7 L 17,17 L 7,17 Z</Geometry>
+
+    <!-- Navigation -->
+    <Geometry x:Key="IconLibrary">M 4,5 L 4,19 M 8,5 L 8,19 M 12.5,5.5 L 17.5,18.5</Geometry>
+    <Geometry x:Key="IconQueue">M 4,7 L 15,7 M 4,12 L 15,12 M 4,17 L 11,17 M 18,10 L 18,19 M 18,10 L 21,9 L 21,18</Geometry>
+    <Geometry x:Key="IconSettings">M 12,9.25 A 2.75,2.75 0 1 0 12,14.75 A 2.75,2.75 0 1 0 12,9.25 Z M 12,3.5 L 13,5.8 L 15.4,5.2 L 15.9,7.6 L 18.2,8.3 L 17.3,10.6 L 19,12 L 17.3,13.4 L 18.2,15.7 L 15.9,16.4 L 15.4,18.8 L 13,18.2 L 12,20.5 L 11,18.2 L 8.6,18.8 L 8.1,16.4 L 5.8,15.7 L 6.7,13.4 L 5,12 L 6.7,10.6 L 5.8,8.3 L 8.1,7.6 L 8.6,5.2 L 11,5.8 Z</Geometry>
+    <Geometry x:Key="IconFolderAdd">M 3,6.5 L 9,6.5 L 11,9 L 21,9 L 21,18.5 L 3,18.5 Z M 12,11.5 L 12,16 M 9.75,13.75 L 14.25,13.75</Geometry>
+    <Geometry x:Key="IconSearch">M 10.5,4.5 A 6,6 0 1 0 10.5,16.5 A 6,6 0 1 0 10.5,4.5 Z M 15,15 L 20,20</Geometry>
+
+    <!-- Status and utility -->
+    <Geometry x:Key="IconSpeaker">M 4,9.5 L 7.5,9.5 L 12,5.5 L 12,18.5 L 7.5,14.5 L 4,14.5 Z M 15.5,9 A 4.5,4.5 0 0 1 15.5,15 M 18,6.5 A 8,8 0 0 1 18,17.5</Geometry>
+    <Geometry x:Key="IconSpeakerMuted">M 4,9.5 L 7.5,9.5 L 12,5.5 L 12,18.5 L 7.5,14.5 L 4,14.5 Z M 15.5,9.5 L 20.5,14.5 M 20.5,9.5 L 15.5,14.5</Geometry>
+    <Geometry x:Key="IconOpenApp">M 5,5.5 L 12,5.5 M 5,5.5 L 5,18.5 L 18,18.5 L 18,11.5 M 13,4.5 L 19.5,4.5 L 19.5,11 M 19.5,4.5 L 11.5,12.5</Geometry>
+    <Geometry x:Key="IconClose">M 6,6 L 18,18 M 18,6 L 6,18</Geometry>
+    <Geometry x:Key="IconMinimize">M 5,12 L 19,12</Geometry>
+    <Geometry x:Key="IconMaximize">M 6,6 L 18,6 L 18,18 L 6,18 Z</Geometry>
+    <Geometry x:Key="IconHome">M 4,11 L 12,4.5 L 20,11 M 6,10 L 6,19.5 L 18,19.5 L 18,10 M 10,19.5 L 10,14 L 14,14 L 14,19.5</Geometry>
+    <Geometry x:Key="IconShuffle">M 4,7 L 8,7 C 13,7 11,17 16,17 L 20,17 M 17.5,14.5 L 20,17 L 17.5,19.5 M 4,17 L 8,17 C 9.5,17 10.3,16.2 11,15.2 M 13,8.8 C 13.7,7.8 14.5,7 16,7 L 20,7 M 17.5,4.5 L 20,7 L 17.5,9.5</Geometry>
+    <Geometry x:Key="IconRefresh">M 19,12 A 7,7 0 1 1 16.9,7.1 M 19.5,4.5 L 19.5,9 L 15,9</Geometry>
+    <Geometry x:Key="IconBack">M 14.5,6 L 8.5,12 L 14.5,18 M 9,12 L 19,12</Geometry>
+    <Geometry x:Key="IconRestore">M 8.5,8.5 L 17.5,8.5 L 17.5,17.5 L 8.5,17.5 Z M 10.5,6 L 18,6 L 18,13.5</Geometry>
+    <Geometry x:Key="IconRepeat">M 7,7.5 L 17,7.5 L 17,12 M 17,16.5 L 7,16.5 L 7,12 M 14.5,5 L 17,7.5 L 14.5,10 M 9.5,14 L 7,16.5 L 9.5,19</Geometry>
+    <Geometry x:Key="IconRepeatOne">M 7,7.5 L 17,7.5 L 17,12 M 17,16.5 L 7,16.5 L 7,12 M 14.5,5 L 17,7.5 L 14.5,10 M 11,11.25 L 12.25,10.5 L 12.25,15</Geometry>
+    <Geometry x:Key="IconChevronDown">M 7,10 L 12,15 L 17,10</Geometry>
+    <Geometry x:Key="IconChevronRight">M 10,7 L 15,12 L 10,17</Geometry>
+    <Geometry x:Key="IconWarning">M 12,4.5 L 21,19.5 L 3,19.5 Z M 12,9.5 L 12,14 M 12,16.75 L 12,17.25</Geometry>
+    <Geometry x:Key="IconInfo">M 12,4.5 A 7.5,7.5 0 1 0 12,19.5 A 7.5,7.5 0 1 0 12,4.5 Z M 12,7.75 L 12,8.25 M 12,11 L 12,16</Geometry>
+    <Geometry x:Key="IconVinyl">M 12,3.5 A 8.5,8.5 0 1 0 12,20.5 A 8.5,8.5 0 1 0 12,3.5 Z M 12,9.25 A 2.75,2.75 0 1 0 12,14.75 A 2.75,2.75 0 1 0 12,9.25 Z M 6.6,8.2 A 6.2,6.2 0 0 1 9,5.6</Geometry>
+    <Geometry x:Key="IconNote">M 9,17.5 A 2.5,2.5 0 1 0 9,12.5 A 2.5,2.5 0 1 0 9,17.5 Z M 11.5,15 L 11.5,5.5 L 19,4 L 19,13 M 19,13 A 2.5,2.5 0 1 1 19,8 A 2.5,2.5 0 1 1 19,13 Z</Geometry>
+
+</ResourceDictionary>

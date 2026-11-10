@@ -1,0 +1,200 @@
+<UserControl x:Class="Noct.App.Views.NowPlayingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:v="clr-namespace:Noct.App.Views"
+             AutomationProperties.Name="Now Playing page">
+    <UserControl.Resources>
+        <!-- A lyric line is a flat button: click seeks. Dim by default, white when it is the active line. -->
+        <Style x:Key="LyricLineButton" TargetType="Button">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Opacity" Value="0.5" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="FocusVisualStyle" Value="{StaticResource InsetFocusRing}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="Transparent" Padding="0,9" CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.8" />
+                </Trigger>
+                <DataTrigger Binding="{Binding CanSeek}" Value="False">
+                    <Setter Property="IsHitTestVisible" Value="False" />
+                    <Setter Property="Focusable" Value="False" />
+                    <Setter Property="Cursor" Value="Arrow" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsActive}" Value="True">
+                    <Setter Property="Opacity" Value="1" />
+                    <Setter Property="AutomationProperties.ItemStatus" Value="active" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid x:Name="Layout" Margin="32,0,32,16">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="DiscColumn" Width="9*" />
+            <ColumnDefinition x:Name="LyricsColumn" Width="11*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="DiscRow" Height="*" />
+            <RowDefinition x:Name="LyricsRow" Height="0" />
+        </Grid.RowDefinitions>
+
+        <!-- A very faint wash of the artwork's own colour behind the disc. Nothing is generated. -->
+        <Rectangle x:Name="Glow" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="-32,0,-32,-16" IsHitTestVisible="False" />
+
+        <!-- ===== Disc ===== -->
+        <Grid x:Name="DiscPanel" Grid.Row="0" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- A Label gives the disc a UI Automation element, so its turning state can be read as well as seen. -->
+            <Label x:Name="Disc" Padding="0" Margin="0,8,0,16" MaxWidth="400" MaxHeight="400" Focusable="False"
+                   HorizontalAlignment="Center" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                   AutomationProperties.Name="Vinyl record">
+            <Viewbox Stretch="Uniform">
+                <Grid Width="320" Height="320">
+                    <Grid x:Name="Spinner" RenderTransformOrigin="0.5,0.5" AutomationProperties.Name="Vinyl spinner">
+                        <!-- The disc is drawn once into a texture and the GPU only turns that texture. Without this, every
+                             frame of the rotation re-tessellates the grooves and the artwork brush. -->
+                        <Grid.CacheMode>
+                            <BitmapCache RenderAtScale="2" SnapsToDevicePixels="False" EnableClearType="False" />
+                        </Grid.CacheMode>
+                        <Grid.RenderTransform>
+                            <RotateTransform x:Name="SpinTransform" Angle="0" />
+                        </Grid.RenderTransform>
+
+                        <Ellipse StrokeThickness="1" Stroke="{StaticResource HairlineStrongBrush}">
+                            <Ellipse.Fill>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="#FF1A1B1F" Offset="0" />
+                                    <GradientStop Color="#FF0F1013" Offset="0.55" />
+                                    <GradientStop Color="#FF060607" Offset="1" />
+                                </RadialGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+
+                        <!-- Grooves -->
+                        <Path Stroke="#12FFFFFF" StrokeThickness="0.75" Width="320" Height="320">
+                            <Path.Data>
+                                <GeometryGroup>
+                                    <EllipseGeometry Center="160,160" RadiusX="152" RadiusY="152" />
+                                    <EllipseGeometry Center="160,160" RadiusX="146" RadiusY="146" />
+                                    <EllipseGeometry Center="160,160" RadiusX="140" RadiusY="140" />
+                                    <EllipseGeometry Center="160,160" RadiusX="134" RadiusY="134" />
+                                    <EllipseGeometry Center="160,160" RadiusX="128" RadiusY="128" />
+                                    <EllipseGeometry Center="160,160" RadiusX="122" RadiusY="122" />
+                                    <EllipseGeometry Center="160,160" RadiusX="116" RadiusY="116" />
+                                    <EllipseGeometry Center="160,160" RadiusX="110" RadiusY="110" />
+                                    <EllipseGeometry Center="160,160" RadiusX="104" RadiusY="104" />
+                                    <EllipseGeometry Center="160,160" RadiusX="98" RadiusY="98" />
+                                    <EllipseGeometry Center="160,160" RadiusX="92" RadiusY="92" />
+                                    <EllipseGeometry Center="160,160" RadiusX="86" RadiusY="86" />
+                                </GeometryGroup>
+                            </Path.Data>
+                        </Path>
+                        <!-- Two short bands where the grooves part, so the turning is visible on the disc itself. -->
+                        <Path Stroke="#26FFFFFF" StrokeThickness="2" Width="320" Height="320" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                              Data="M 35,160 A 125,125 0 0 0 51.7,222.5 M 285,160 A 125,125 0 0 0 268.3,97.5" />
+
+                        <!-- Centre label: the cover. -->
+                        <Grid Width="144" Height="144">
+                            <Ellipse Fill="{StaticResource RaisedSurfaceBrush}" />
+                            <Ellipse Visibility="{Binding Playback.HasArtwork, Converter={StaticResource BoolToVisibility}}">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding Playback.Artwork}" Stretch="UniformToFill" />
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse Stroke="#33000000" StrokeThickness="1" />
+                            <Ellipse Width="12" Height="12" Fill="#FF08090B" Stroke="{StaticResource HairlineStrongBrush}" StrokeThickness="1" />
+                        </Grid>
+                    </Grid>
+
+                    <!-- Light on the record does not turn with it. -->
+                    <Ellipse IsHitTestVisible="False">
+                        <Ellipse.Fill>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#00FFFFFF" Offset="0.30" />
+                                <GradientStop Color="#0DFFFFFF" Offset="0.42" />
+                                <GradientStop Color="#00FFFFFF" Offset="0.52" />
+                                <GradientStop Color="#00FFFFFF" Offset="0.70" />
+                                <GradientStop Color="#08FFFFFF" Offset="0.80" />
+                                <GradientStop Color="#00FFFFFF" Offset="0.90" />
+                            </LinearGradientBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </Grid>
+            </Viewbox>
+            </Label>
+
+            <StackPanel Grid.Row="1" HorizontalAlignment="Center" MaxWidth="420" Margin="0,0,0,8">
+                <TextBlock Style="{StaticResource TitleText}" HorizontalAlignment="Center" TextAlignment="Center"
+                           TextTrimming="CharacterEllipsis" MaxHeight="64" TextWrapping="Wrap"
+                           Text="{Binding Playback.Title}" ToolTip="{Binding Playback.Title}" />
+                <TextBlock Style="{StaticResource SecondaryText}" FontSize="14" Margin="0,4,0,0" TextAlignment="Center"
+                           HorizontalAlignment="Center" TextTrimming="CharacterEllipsis"
+                           Text="{Binding Playback.Artist}" />
+            </StackPanel>
+        </Grid>
+
+        <!-- ===== Lyrics ===== -->
+        <Grid x:Name="LyricsPanel" Grid.Row="0" Grid.Column="1" Margin="32,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <ScrollViewer x:Name="LyricsScroll" VerticalScrollBarVisibility="Auto" Focusable="False" PanningMode="VerticalOnly" v:SmoothWheel.Enabled="True"
+                          Visibility="{Binding Lyrics.HasLyrics, Converter={StaticResource BoolToVisibility}}"
+                          AutomationProperties.Name="Lyrics">
+                <ScrollViewer.OpacityMask>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#00000000" Offset="0" />
+                        <GradientStop Color="#FF000000" Offset="0.12" />
+                        <GradientStop Color="#FF000000" Offset="0.88" />
+                        <GradientStop Color="#00000000" Offset="1" />
+                    </LinearGradientBrush>
+                </ScrollViewer.OpacityMask>
+                <ItemsControl x:Name="LyricsList" ItemsSource="{Binding Lyrics.Lines}" Focusable="False" FontSize="28"
+                              Margin="0,200,12,200" AutomationProperties.Name="Lyric lines">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource LyricLineButton}"
+                                    Command="{Binding DataContext.Lyrics.SeekToLineCommand, RelativeSource={RelativeSource AncestorType=v:NowPlayingView}}"
+                                    CommandParameter="{Binding}"
+                                    AutomationProperties.Name="{Binding Text}">
+                                <TextBlock Text="{Binding Text}" TextWrapping="Wrap" FontWeight="SemiBold" MinHeight="12" />
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <!-- No lyrics beside the song: say so. Nothing to click, so nothing else takes room. -->
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" MaxWidth="420"
+                        Visibility="{Binding Lyrics.ShowEmptyState, Converter={StaticResource BoolToVisibility}}">
+                <TextBlock Style="{StaticResource TitleText}" Text="{Binding Lyrics.EmptyTitle}" />
+                <TextBlock Style="{StaticResource WrappingBody}" Foreground="{StaticResource SecondaryTextBrush}" Margin="0,8,0,0"
+                           Text="{Binding Lyrics.EmptyHint}" />
+            </StackPanel>
+
+            <Button x:Name="FollowButton" Style="{StaticResource TextButton}" HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                    Margin="0,0,0,12" Content="Follow song" Command="{Binding Lyrics.ResumeFollowCommand}"
+                    AutomationProperties.Name="Follow song"
+                    Visibility="{Binding Lyrics.ShowFollowButton, Converter={StaticResource BoolToVisibility}}" />
+
+            <!-- Shown only when the lyrics carry no timestamps and so cannot follow the song. -->
+            <TextBlock Grid.Row="1" Style="{StaticResource CaptionText}" Margin="0,8,0,0" Text="Lyrics have no timestamps"
+                       Visibility="{Binding Lyrics.IsUnsyncedNotice, Converter={StaticResource BoolToVisibility}}" />
+        </Grid>
+    </Grid>
+</UserControl>

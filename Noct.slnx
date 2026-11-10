@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Noct.App/Noct.App.csproj" />
+    <Project Path="src/Noct.Core/Noct.Core.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Noct.Tests/Noct.Tests.csproj" />
+  </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/Noct.Diagnostics/Noct.Diagnostics.csproj" />
+  </Folder>
+</Solution>

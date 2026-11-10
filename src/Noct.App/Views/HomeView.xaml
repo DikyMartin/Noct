@@ -1,0 +1,66 @@
+<UserControl x:Class="Noct.App.Views.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:v="clr-namespace:Noct.App.Views"
+             AutomationProperties.Name="Home">
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Focusable="False" v:SmoothWheel.Enabled="True"
+                      Visibility="{Binding HasContent, Converter={StaticResource BoolToVisibility}}">
+            <StackPanel Margin="24,8,24,32">
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,24">
+                    <Button Style="{StaticResource PrimaryButton}" AutomationProperties.Name="Shuffle all"
+                            Command="{Binding ShuffleAllCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <v:GlyphIcon Data="{StaticResource IconShuffle}" Size="18" Margin="0,0,8,0"
+                                         Foreground="{StaticResource OnLightTextBrush}" />
+                            <TextBlock Text="Shuffle all" Foreground="{StaticResource OnLightTextBrush}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource IconButton}" Margin="12,0,0,0" Width="38" Height="38"
+                            Foreground="{StaticResource SecondaryTextBrush}" ToolTip="Pick new albums and songs"
+                            AutomationProperties.Name="Refresh picks" Command="{Binding RefreshCommand}">
+                        <v:GlyphIcon Data="{StaticResource IconRefresh}" />
+                    </Button>
+                </StackPanel>
+
+                <TextBlock Style="{StaticResource SectionLabel}" Text="Albums" Margin="0,0,0,8"
+                           Visibility="{Binding HasAlbums, Converter={StaticResource BoolToVisibility}}" />
+                <ItemsControl ItemsSource="{Binding Albums}" Focusable="False" Margin="-8,0,0,0">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+
+                <TextBlock Style="{StaticResource SectionLabel}" Text="Songs" Margin="0,16,0,8"
+                           Visibility="{Binding HasSongs, Converter={StaticResource BoolToVisibility}}" />
+                <ItemsControl ItemsSource="{Binding Songs}" Focusable="False" Margin="-8,0,0,0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource RowButton}" ContentTemplate="{StaticResource TrackRowTemplate}" Content="{Binding}"
+                                    AutomationProperties.Name="{Binding Title}"
+                                    Command="{Binding DataContext.PlaySongCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                    CommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Nothing to pick from yet. -->
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="360"
+                    Visibility="{Binding IsEmpty, Converter={StaticResource BoolToVisibility}}">
+            <TextBlock Style="{StaticResource WrappingBody}" TextAlignment="Center" FontSize="14"
+                       Text="Add a folder with FLAC files to build your library." />
+            <Button Style="{StaticResource PrimaryButton}" Margin="0,16,0,0" HorizontalAlignment="Center"
+                    AutomationProperties.Name="Add folder" Click="OnAddFolderClick">
+                <StackPanel Orientation="Horizontal">
+                    <v:GlyphIcon Data="{StaticResource IconFolderAdd}" Size="18" Margin="0,0,8,0" />
+                    <TextBlock Text="Add folder" Foreground="{StaticResource OnLightTextBrush}" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

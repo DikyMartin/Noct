@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+
+    <!-- The deliverable is Noct.exe; namespaces stay Noct.App to match the folder. -->
+    <AssemblyName>Noct</AssemblyName>
+    <RootNamespace>Noct.App</RootNamespace>
+    <ApplicationIcon>Assets\Noct.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Title>Noct</Title>
+    <Description>Personal local FLAC player</Description>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Noct.Core\Noct.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The WPF SDK leaves System.IO out of the implicit usings. -->
+    <Using Include="System.IO" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Noct.ico" />
+    <Resource Include="Assets\NoctMark.png" />
+  </ItemGroup>
+
+</Project>

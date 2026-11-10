@@ -1,0 +1,55 @@
+<UserControl x:Class="Noct.App.Views.NowPlayingPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:v="clr-namespace:Noct.App.Views"
+             AutomationProperties.Name="Now Playing">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Focusable="False" v:SmoothWheel.Enabled="True">
+        <StackPanel Margin="16,48,16,16">
+
+            <!-- Artwork: the real embedded image, or a neutral placeholder. Nothing is invented. -->
+            <Button Click="OnArtworkClick" Width="240" Height="240" Padding="0" Cursor="Hand" HorizontalAlignment="Left"
+                    ToolTip="Open Now Playing" AutomationProperties.Name="Open Now Playing"
+                    FocusVisualStyle="{StaticResource InsetFocusRing}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter />
+                    </ControlTemplate>
+                </Button.Template>
+            <Border Width="240" Height="240" CornerRadius="12" ClipToBounds="True"
+                    Background="{StaticResource RaisedSurfaceBrush}"
+                    BorderBrush="{StaticResource HairlineBrush}" BorderThickness="1">
+                <Grid>
+                    <v:GlyphIcon Data="{StaticResource IconNote}" Size="48" StrokeThickness="1.25"
+                                 HorizontalAlignment="Center" VerticalAlignment="Center"
+                                 Foreground="{StaticResource DisabledTextBrush}" />
+                    <Image Source="{Binding Artwork}" Stretch="UniformToFill"
+                           RenderOptions.BitmapScalingMode="HighQuality"
+                           Visibility="{Binding HasArtwork, Converter={StaticResource BoolToVisibility}}"
+                           AutomationProperties.Name="Album artwork" />
+                </Grid>
+            </Border>
+            </Button>
+
+            <TextBlock Style="{StaticResource TitleText}" Margin="0,16,0,0" MaxHeight="84"
+                       TextTrimming="CharacterEllipsis" Text="{Binding Title}" ToolTip="{Binding Title}" />
+            <TextBlock Style="{StaticResource SecondaryText}" Margin="0,4,0,0" FontSize="14" Text="{Binding Artist}" />
+            <TextBlock Style="{StaticResource CaptionText}" Margin="0,2,0,0" Text="{Binding Album}"
+                       Visibility="{Binding HasAlbum, Converter={StaticResource BoolToVisibility}}" />
+
+            <Rectangle Height="1" Fill="{StaticResource DividerBrush}" Margin="0,16" />
+
+            <!-- Source and output are listed separately because they are different facts. -->
+            <ItemsControl ItemsSource="{Binding InfoRows}" Focusable="False">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="0,0,0,10">
+                            <TextBlock Style="{StaticResource CaptionText}" Text="{Binding Label}" />
+                            <TextBlock Style="{StaticResource WrappingBody}" Foreground="{StaticResource PrimaryTextBrush}"
+                                       FontSize="13" Text="{Binding Value}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

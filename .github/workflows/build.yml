@@ -1,0 +1,55 @@
+name: Build and package
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-2025
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: powershell
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6
+        with:
+          dotnet-version: '10.0.x'
+      - name: Generate reference audio with Xiph FLAC 1.5.0
+        run: |
+          $archive = Join-Path $env:RUNNER_TEMP 'flac-1.5.0-win.zip'
+          Invoke-WebRequest -Uri 'https://github.com/xiph/flac/releases/download/1.5.0/flac-1.5.0-win.zip' -OutFile $archive -UseBasicParsing
+          $expected = '53f1500f0d6e7c61379d7fee50d4a9f7f504c650009506d9ba015530d76c0dde'
+          if ((Get-FileHash -LiteralPath $archive -Algorithm SHA256).Hash.ToLowerInvariant() -ne $expected) {
+              throw 'Xiph FLAC archive checksum differs from the verified 1.5.0 download.'
+          }
+          $tools = Join-Path $env:RUNNER_TEMP 'noct-flac'
+          Expand-Archive -LiteralPath $archive -DestinationPath $tools -Force
+          & .\build\make-test-audio.ps1 -ToolDirectory (Join-Path $tools 'flac-1.5.0-win\Win64')
+      - name: Build solution
+        run: dotnet build Noct.slnx --configuration Release
+      - name: Run unit tests
+        run: dotnet test tests/Noct.Tests/Noct.Tests.csproj --configuration Release --no-build --logger "trx;LogFileName=noct-tests.trx" --results-directory artifacts/test-results
+      - name: Package ZIP and installer
+        run: .\build\package.ps1
+      - name: Upload packages
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: noct-windows-x64
+          path: dist/release/*
+          if-no-files-found: error
+          compression-level: 0
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: noct-test-results
+          path: artifacts/test-results/*.trx
+          if-no-files-found: ignore

@@ -1,0 +1,42 @@
+# .NET build and test output
+**/bin/
+**/obj/
+**/TestResults/
+*.trx
+*.coverage
+*.coveragexml
+*.nupkg
+*.snupkg
+
+# Generated audio fixtures, screenshots, diagnostic data and release packages
+/artifacts/
+/dist/
+
+# Editor and machine-specific settings
+.vs/
+.vscode/
+.idea/
+.kiro/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Logs, caches and temporary files
+*.log
+*.dmp
+*.stackdump
+*.tmp
+*.temp
+*.bak
+*.orig
+.DS_Store
+Thumbs.db
+
+# Local secrets and signing keys
+.env
+.env.*
+!.env.example
+*.pfx
+*.p12
+*.key

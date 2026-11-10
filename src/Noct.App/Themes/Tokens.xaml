@@ -1,0 +1,117 @@
+<!--
+    Visual tokens for Noct. Every colour, size, radius and duration used by the views is defined
+    here so a change happens in one place. See docs/DEVELOPMENT.md for the UI boundaries.
+
+    Surface tint and border opacity are separate values on purpose: the window may sit on a native
+    dark backdrop, but text and icons are always drawn at full opacity so they stay crisp. No style
+    in this project lowers the opacity of a whole control tree.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+
+    <!-- ===== Palette ===== -->
+    <Color x:Key="AppBackgroundColor">#FF08090B</Color>
+    <Color x:Key="PrimarySurfaceColor">#FF101114</Color>
+    <Color x:Key="RaisedSurfaceColor">#FF181A1F</Color>
+    <Color x:Key="IslandBaseColor">#FF050506</Color>
+    <Color x:Key="PrimaryTextColor">#FFF2F3F5</Color>
+    <Color x:Key="SecondaryTextColor">#FFA5A9B1</Color>
+    <Color x:Key="DisabledTextColor">#FF5E636C</Color>
+    <Color x:Key="PlayButtonColor">#FFEDEEF0</Color>
+    <Color x:Key="FocusRingColor">#FFDCDEE3</Color>
+    <Color x:Key="ErrorTextColor">#FFF0A8A0</Color>
+    <Color x:Key="WarningTextColor">#FFE8C98A</Color>
+
+    <SolidColorBrush x:Key="AppBackgroundBrush" Color="{StaticResource AppBackgroundColor}" />
+    <SolidColorBrush x:Key="PrimarySurfaceBrush" Color="{StaticResource PrimarySurfaceColor}" />
+    <SolidColorBrush x:Key="RaisedSurfaceBrush" Color="{StaticResource RaisedSurfaceColor}" />
+    <SolidColorBrush x:Key="IslandBaseBrush" Color="{StaticResource IslandBaseColor}" />
+    <SolidColorBrush x:Key="PrimaryTextBrush" Color="{StaticResource PrimaryTextColor}" />
+    <SolidColorBrush x:Key="SecondaryTextBrush" Color="{StaticResource SecondaryTextColor}" />
+    <SolidColorBrush x:Key="DisabledTextBrush" Color="{StaticResource DisabledTextColor}" />
+    <SolidColorBrush x:Key="PlayButtonBrush" Color="{StaticResource PlayButtonColor}" />
+    <SolidColorBrush x:Key="FocusRingBrush" Color="{StaticResource FocusRingColor}" />
+    <SolidColorBrush x:Key="ErrorTextBrush" Color="{StaticResource ErrorTextColor}" />
+    <SolidColorBrush x:Key="WarningTextBrush" Color="{StaticResource WarningTextColor}" />
+
+    <!--
+        Glass tint. Painted over the native backdrop so background shapes stay subdued and text
+        keeps its contrast. When the backdrop is unavailable the window swaps these for the opaque
+        fallback brushes below, which keeps the same hierarchy without pretending to be glass.
+    -->
+    <SolidColorBrush x:Key="GlassTintBrush" Color="#C212141A" />
+    <SolidColorBrush x:Key="GlassTintStrongBrush" Color="#E60B0C10" />
+    <SolidColorBrush x:Key="GlassTintSolidBrush" Color="{StaticResource PrimarySurfaceColor}" />
+
+    <!-- The island is "strongly tinted": nearly opaque even over a live backdrop. -->
+    <SolidColorBrush x:Key="IslandTintBrush" Color="#EB050506" />
+    <SolidColorBrush x:Key="IslandTintSolidBrush" Color="#FF050506" />
+    <SolidColorBrush x:Key="OnLightTextBrush" Color="#FF0B0C0F" />
+
+    <!-- Borders are decorative only; opacity here never affects content. -->
+    <SolidColorBrush x:Key="HairlineBrush" Color="#1AFFFFFF" />
+    <SolidColorBrush x:Key="HairlineStrongBrush" Color="#24FFFFFF" />
+    <SolidColorBrush x:Key="DividerBrush" Color="#14FFFFFF" />
+
+    <!-- Interaction fills. -->
+    <SolidColorBrush x:Key="HoverFillBrush" Color="#14FFFFFF" />
+    <SolidColorBrush x:Key="PressedFillBrush" Color="#0AFFFFFF" />
+    <SolidColorBrush x:Key="SelectedFillBrush" Color="#1FFFFFFF" />
+    <SolidColorBrush x:Key="TrackFillBrush" Color="#26FFFFFF" />
+    <SolidColorBrush x:Key="TransparentBrush" Color="Transparent" />
+
+    <!-- The song list keeps a stable near-black fill rather than glass, so it stays easy to read. -->
+    <SolidColorBrush x:Key="ListSurfaceBrush" Color="#FF0B0C0F" />
+
+    <!-- ===== Typography ===== -->
+    <!--
+        Segoe UI Variable first, Segoe UI as the fallback on older builds, then CJK-capable system
+        families so Japanese, Chinese and Korean metadata render instead of showing boxes.
+    -->
+    <FontFamily x:Key="BodyFontFamily">Segoe UI Variable Text, Segoe UI, Yu Gothic UI, Microsoft YaHei UI, Malgun Gothic, Segoe UI Symbol</FontFamily>
+    <FontFamily x:Key="DisplayFontFamily">Segoe UI Variable Display, Segoe UI Variable Text, Segoe UI, Yu Gothic UI, Microsoft YaHei UI, Malgun Gothic</FontFamily>
+
+    <sys:Double x:Key="FontSizeCaption">12</sys:Double>
+    <sys:Double x:Key="FontSizeLabel">13</sys:Double>
+    <sys:Double x:Key="FontSizeBody">14</sys:Double>
+    <sys:Double x:Key="FontSizeSubtitle">16</sys:Double>
+    <sys:Double x:Key="FontSizeTitle">22</sys:Double>
+
+    <!-- ===== Spacing scale: 4, 8, 12, 16, 24, 32 ===== -->
+    <Thickness x:Key="Space4">4</Thickness>
+    <Thickness x:Key="Space8">8</Thickness>
+    <Thickness x:Key="Space12">12</Thickness>
+    <Thickness x:Key="Space16">16</Thickness>
+    <Thickness x:Key="Space24">24</Thickness>
+    <Thickness x:Key="Space32">32</Thickness>
+
+    <GridLength x:Key="NavigationColumnWidth">176</GridLength>
+    <GridLength x:Key="TransportRowHeight">84</GridLength>
+    <GridLength x:Key="ToolbarRowHeight">56</GridLength>
+    <sys:Double x:Key="NavigationWidth">176</sys:Double>
+    <sys:Double x:Key="ArtworkPanelWidth">240</sys:Double>
+    <sys:Double x:Key="TransportHeight">84</sys:Double>
+    <sys:Double x:Key="ToolbarHeight">56</sys:Double>
+    <sys:Double x:Key="TrackRowHeight">44</sys:Double>
+    <sys:Double x:Key="TouchTargetSize">32</sys:Double>
+
+    <!-- ===== Radii ===== -->
+    <CornerRadius x:Key="PanelRadius">14</CornerRadius>
+    <CornerRadius x:Key="SurfaceRadius">10</CornerRadius>
+    <CornerRadius x:Key="MenuRadius">12</CornerRadius>
+    <CornerRadius x:Key="ControlRadius">8</CornerRadius>
+    <CornerRadius x:Key="PillRadius">999</CornerRadius>
+
+    <!-- Island silhouette: square at the screen edge, rounded along the bottom. -->
+    <CornerRadius x:Key="IslandCompactRadius">0,0,18,18</CornerRadius>
+    <CornerRadius x:Key="IslandExpandedRadius">0,0,24,24</CornerRadius>
+
+    <!-- ===== Motion: 180-240 ms, gentle ease-out, no bounce or overshoot ===== -->
+    <Duration x:Key="MotionFast">0:0:0.18</Duration>
+    <Duration x:Key="MotionNormal">0:0:0.22</Duration>
+    <Duration x:Key="MotionSlow">0:0:0.24</Duration>
+
+    <CubicEase x:Key="MotionEase" EasingMode="EaseOut" />
+
+</ResourceDictionary>

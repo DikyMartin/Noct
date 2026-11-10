@@ -1,0 +1,11 @@
+* text=auto
+*.ps1 text eol=crlf
+*.iss text eol=crlf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.sh text eol=lf
+*.png binary
+*.ico binary
+*.flac binary
+*.wav binary
+*.pcm binary
