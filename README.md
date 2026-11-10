@@ -1,91 +1,91 @@
 # Noct
 
-Noct adalah pemutar FLAC lokal untuk Windows. Tambahkan folder musik, pilih album atau lagu, lalu putar dari jendela utama atau kontrol kecil di tepi atas layar saat aplikasi diminimalkan. Antarmuka aplikasi menggunakan bahasa Inggris.
+Noct is a local FLAC player for Windows. Add a music folder, choose an album or track, and control playback from the main window or a small panel at the top of the screen when the app is minimized. The app's interface is in English.
 
-## Unduh aplikasi
+## Download
 
-Unduh paket siap pakai dari [Releases Noct 0.5.1](https://github.com/DikyMartin/Noct/releases/tag/v0.5.1).
+Download the ready-to-run packages from the [Noct 0.5.1 release](https://github.com/DikyMartin/Noct/releases/tag/v0.5.1).
 
-Pilih salah satu paket berikut:
+Choose one of these packages:
 
-| Paket | Cara memakai |
+| Package | How to use it |
 | --- | --- |
-| [Installer Windows x64](https://github.com/DikyMartin/Noct/releases/download/v0.5.1/Noct-Setup-0.5.1-x64.exe) | Jalankan installer, lalu buka Noct dari Start Menu. |
-| [ZIP Windows x64](https://github.com/DikyMartin/Noct/releases/download/v0.5.1/Noct-0.5.1-win-x64.zip) | Ekstrak seluruh ZIP ke folder pilihan, lalu jalankan `Noct.exe` di dalamnya. |
+| [Windows x64 installer](https://github.com/DikyMartin/Noct/releases/download/v0.5.1/Noct-Setup-0.5.1-x64.exe) | Run the installer, then open Noct from the Start Menu. |
+| [Windows x64 ZIP](https://github.com/DikyMartin/Noct/releases/download/v0.5.1/Noct-0.5.1-win-x64.zip) | Extract the entire ZIP to a folder of your choice, then run `Noct.exe` inside it. |
 
-[SHA256SUMS.txt](https://github.com/DikyMartin/Noct/releases/download/v0.5.1/SHA256SUMS.txt) berisi checksum kedua paket untuk memeriksa kecocokan unduhan.
+[SHA256SUMS.txt](https://github.com/DikyMartin/Noct/releases/download/v0.5.1/SHA256SUMS.txt) contains checksums for both packages so you can check your downloads.
 
-Paket installer dan ZIP menyertakan .NET Desktop Runtime. Pengguna tidak perlu memasang .NET atau SDK secara terpisah. ZIP **Source code** yang dibuat GitHub berisi source, bukan aplikasi siap jalan.
+Both packages include the .NET Desktop Runtime. You do not need to install .NET or the SDK separately. GitHub's **Source code** ZIP contains the source files, not a ready-to-run app.
 
-## Persyaratan
+## Requirements
 
-- Windows 11 x64. Paket yang disiapkan adalah `win-x64`; Windows 10, ARM64, dan Windows versi lain belum diuji.
-- Perangkat output audio Windows. Driver ASIO diperlukan hanya jika memilih ASIO.
-- File musik berformat FLAC. Format musik lain dan layanan streaming tidak tersedia.
+- Windows 11 x64. The packages target `win-x64`; Windows 10, ARM64, and other Windows versions have not been tested.
+- A Windows audio output device. An ASIO driver is needed only if you choose ASIO.
+- FLAC music files. Other audio formats and streaming services are not supported.
 
-## Memasang dan menjalankan
+## Install and run
 
-Installer memasang aplikasi untuk pengguna saat ini di `%LocalAppData%\Programs\Noct`, tanpa hak administrator. Shortcut desktop bersifat opsional. Instalasi versi baru menggunakan lokasi yang sama; tutup Noct sebelum memperbarui.
+The installer installs Noct for the current user in `%LocalAppData%\Programs\Noct`, without administrator rights. A desktop shortcut is optional. Updates use the same location; close Noct before updating.
 
-Paket ZIP dapat dijalankan tanpa instalasi. Pertahankan semua file di folder hasil ekstraksi bersama `Noct.exe`; menyalin EXE saja tidak cukup.
+The ZIP package runs without installation. Keep all extracted files together with `Noct.exe`; copying only the EXE is not enough.
 
-1. Buka Noct, lalu pilih **Add folder** di Library.
-2. Pilih folder musik. Noct memindai FLAC di folder tersebut dan subfoldernya. Setiap folder yang langsung berisi FLAC tampil sebagai satu album, dengan nama folder sebagai nama album.
-3. Pilih lagu atau album untuk memutar. Pencarian tersedia di Library; antrean dapat dilihat dan diubah di Queue.
-4. Pilih perangkat dan mode output di Settings bila perlu. WASAPI shared adalah pengaturan awal.
+1. Open Noct and choose **Add folder** in Library.
+2. Select a music folder. Noct scans it and its subfolders for FLAC files. Each folder that directly contains FLAC files appears as an album, using the folder's name as the album name.
+3. Choose a track or album to play. Search is available in Library; you can view and edit the playback queue in Queue.
+4. Choose an output device and mode in Settings if needed. WASAPI shared is the default.
 
-Menghapus album atau sumber dari Library hanya menghapus catatannya di Noct. File musik tidak dihapus atau diubah.
+Removing an album or source folder from Library removes only its record in Noct. Music files are not deleted or changed.
 
-## Fitur yang tersedia
+## Features
 
-- Home, Now Playing, Library, Queue, dan Settings; tampilan album dan semua lagu, pencarian, serta cover dari folder atau file FLAC.
-- Play/pause, previous/next, seek, volume, shuffle album, repeat, **Play next**, dan **Add to queue**.
-- Lirik `.lrc` lokal: letakkan `Song.lrc` di samping `Song.flac`. Lirik bertimestamp disorot saat diputar dan dapat diklik untuk berpindah posisi. Tidak ada pengunduh lirik.
-- Kontrol kecil di tepi atas layar saat minimize, dengan auto-hide dan hover. Pilih **Open Noct** dari island atau tray untuk kembali. Fitur ini dapat dimatikan di Settings. Tombol Close dan tray **Exit** menutup aplikasi dan menghentikan playback.
-- Penyimpanan library, antrean, pengaturan, dan posisi lagu. Saat dibuka kembali, antrean dipulihkan tanpa langsung memutar musik.
-- WASAPI shared, WASAPI exclusive, dan pilihan ASIO bila driver tersedia. Mode Transparent memerlukan WASAPI exclusive dan mengunci volume software pada unity gain.
-- Gapless untuk lagu dengan format yang sama. Pergantian sample rate atau format dapat memerlukan pembukaan ulang perangkat audio.
+- Home, Now Playing, Library, Queue, and Settings; album and all-song views, search, and artwork from folders or FLAC files.
+- Play/pause, previous/next, seek, volume, album shuffle, repeat, **Play next**, and **Add to queue**.
+- Local `.lrc` lyrics: place `Song.lrc` beside `Song.flac`. Timestamped lyrics are highlighted during playback and can be clicked to seek. Noct does not download lyrics.
+- A small panel at the top of the screen when minimized, with auto-hide and hover controls. Choose **Open Noct** from the panel or system tray to return. You can disable this feature in Settings. Close and the tray's **Exit** command close the app and stop playback.
+- Saved library, queue, settings, and track position. The queue is restored when you reopen the app, without starting playback automatically.
+- WASAPI shared, WASAPI exclusive, and optional ASIO output when a driver is available. Transparent mode requires WASAPI exclusive and locks software volume at unity gain.
+- Gapless playback for tracks with the same format. Changing sample rate or format may require reopening the audio device.
 
-WASAPI exclusive atau mode Transparent tidak membuktikan hasil bit-perfect pada driver atau DAC. Pengujian perangkat DAC dan ASIO masih diperlukan; lihat [hasil pemeriksaan dan batasannya](docs/BUILD_NOTES.md).
+WASAPI exclusive and Transparent mode do not prove bit-perfect output through a driver or DAC. DAC and ASIO hardware testing is still needed; see [verification results and limitations](docs/BUILD_NOTES.md).
 
-## Data aplikasi dan uninstall
+## App data and uninstalling
 
-Pengaturan, indeks library, cache cover, dan `noct.log` disimpan di `%LocalAppData%\Noct`, termasuk saat menjalankan paket ZIP. Paket ZIP tidak menyimpan pengaturan di samping EXE.
+Settings, the library index, artwork cache, and `noct.log` are stored in `%LocalAppData%\Noct`, including when you use the ZIP package. The ZIP package does not store settings beside the EXE.
 
-Uninstall melalui Settings Windows menghapus program. Uninstaller menawarkan pilihan untuk menghapus data Noct; file musik dan lirik di folder library tidak termasuk. Untuk paket ZIP, tutup aplikasi lalu hapus folder hasil ekstraksinya. Data di `%LocalAppData%\Noct` dapat dihapus terpisah bila tidak lagi diperlukan.
+Uninstalling through Windows Settings removes the program. The uninstaller offers a choice to remove Noct's data; music and lyrics files in your library folders are not included. For the ZIP package, close the app and delete the extracted folder. You can separately delete `%LocalAppData%\Noct` if you no longer need its data.
 
-## Membangun dari source
+## Build from source
 
-Gunakan Windows x64, PowerShell, dan [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0). Jalankan perintah dari folder yang berisi `Noct.slnx`:
+Use Windows x64, PowerShell, and the [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0). Run these commands from the folder containing `Noct.slnx`:
 
 ```powershell
 dotnet build Noct.slnx -c Release
 dotnet run --project src/Noct.App/Noct.App.csproj -c Release --no-build
 ```
 
-Untuk menjalankan test, pasang [tool FLAC resmi](https://xiph.org/flac/download.html) dan pastikan `flac.exe` serta `metaflac.exe` ada di `PATH`. Tool tersebut hanya diperlukan untuk membuat data uji, bukan untuk menjalankan Noct.
+To run the tests, install the [official FLAC tools](https://xiph.org/flac/download.html) and make sure `flac.exe` and `metaflac.exe` are on `PATH`. These tools are needed only to generate test data, not to run Noct.
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File build/make-test-audio.ps1
 dotnet test tests/Noct.Tests/Noct.Tests.csproj -c Release
 ```
 
-Jika tool FLAC belum ada di `PATH`, berikan lokasi foldernya melalui parameter `-ToolDirectory` pada skrip pembuat data uji.
+If the FLAC tools are not on `PATH`, pass their folder to the test data script using `-ToolDirectory`.
 
-Untuk membuat installer dan ZIP dari source saat ini, pasang [Inno Setup 6](https://jrsoftware.org/isdl.php) dari bagian unduhan versi 6, lalu jalankan:
+To create an installer and ZIP from the current source, install [Inno Setup 6](https://jrsoftware.org/isdl.php) from the version 6 downloads section, then run:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File build/package.ps1
 ```
 
-Hasilnya berada di `dist\release`, bersama `SHA256SUMS.txt`. Versi paket dibaca dari `Directory.Build.props`. Skrip selalu menjalankan publish baru; isi `dist` lama tidak digunakan sebagai dasar release. Untuk membuat ZIP saja tanpa Inno Setup:
+The output is in `dist\release`, together with `SHA256SUMS.txt`. The package version comes from `Directory.Build.props`. The script always publishes a fresh build rather than reusing old `dist` output. To create only a ZIP without Inno Setup:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File build/package.ps1 -ZipOnly
 ```
 
-Struktur source, utilitas diagnosis, dan cara memisahkan data pengujian dijelaskan di [panduan pengembangan](docs/DEVELOPMENT.md). Daftar pemeriksaan manual ada di [VALIDATION.md](docs/VALIDATION.md).
+See the [development guide](docs/DEVELOPMENT.md) for the source layout, diagnostic tools, and isolated test data. The manual verification checklist is in [VALIDATION.md](docs/VALIDATION.md).
 
-## Lisensi
+## License
 
-Lisensi untuk source Noct belum ditetapkan. Lisensi dependensi tidak otomatis berlaku untuk source Noct. Pemberitahuan komponen yang digunakan ada di [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+A license for Noct's source code has not been selected. Dependency licenses do not automatically apply to Noct's source. Notices for the components used by Noct are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

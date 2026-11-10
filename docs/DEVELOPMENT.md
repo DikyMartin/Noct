@@ -27,7 +27,7 @@
 
 ## Build dan test
 
-Perintah utama tersedia di [README](../README.md#membangun-dari-source). Data referensi FLAC sengaja tidak disimpan di Git: `build/make-test-audio.ps1` membuat ulang WAV, FLAC, dan PCM deterministik di `artifacts/testaudio`. Jika folder tersebut tidak ada, test gagal dengan petunjuk generator, bukan melewati pemeriksaan audio.
+Perintah utama tersedia di [README](../README.md#build-from-source). Data referensi FLAC sengaja tidak disimpan di Git: `build/make-test-audio.ps1` membuat ulang WAV, FLAC, dan PCM deterministik di `artifacts/testaudio`. Jika folder tersebut tidak ada, test gagal dengan petunjuk generator, bukan melewati pemeriksaan audio.
 
 Tool `flac.exe` dan `metaflac.exe` dicari di `PATH`, atau di folder `-ToolDirectory` yang diberikan. Test yang ada menggunakan hasil reference encoder Xiph untuk membandingkan sampel, packing PCM, seeking, dan batas lagu. Dependensi output memakai NAudio 3.3.0.
 
